@@ -3,12 +3,6 @@ const User = require("../models/User");
 
 const JWT_SECRET = process.env.JWT_SECRET || "ciphersql_secret_key_2026";
 
-// -------------------------------------------------------------------
-// Auth middleware
-// Verifies JWT token and attaches user to request.
-// Use this to protect routes that require authentication.
-// -------------------------------------------------------------------
-
 const authMiddleware = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
@@ -25,7 +19,6 @@ const authMiddleware = async (req, res, next) => {
             return res.status(401).json({ error: "User not found." });
         }
 
-        // Attach user to request for use in route handlers
         req.user = user;
         req.userId = user._id;
 
@@ -42,7 +35,6 @@ const authMiddleware = async (req, res, next) => {
     }
 };
 
-// Optional auth - doesn't fail if no token, just sets user if valid
 const optionalAuth = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
@@ -62,7 +54,6 @@ const optionalAuth = async (req, res, next) => {
 
         next();
     } catch (err) {
-        // Token invalid but that's OK for optional auth
         next();
     }
 };

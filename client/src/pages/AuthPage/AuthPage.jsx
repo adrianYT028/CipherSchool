@@ -3,13 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./AuthPage.scss";
 
-// -------------------------------------------------------------------
-// AuthPage
-// Login and signup forms in a single page with tab switching.
-// -------------------------------------------------------------------
-
 function AuthPage() {
-    const [mode, setMode] = useState("login"); // "login" | "signup"
+    const [mode, setMode] = useState("login");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
@@ -56,7 +51,6 @@ function AuthPage() {
                         : "Join CipherSQLStudio to track your progress"}
                 </p>
 
-                {/* Tab switcher */}
                 <div className="auth-page__tabs">
                     <button
                         className={`auth-page__tab ${mode === "login" ? "auth-page__tab--active" : ""}`}

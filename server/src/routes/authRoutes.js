@@ -4,19 +4,13 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-// JWT secret - in production use a proper secret from env
 const JWT_SECRET = process.env.JWT_SECRET || "ciphersql_secret_key_2026";
 const JWT_EXPIRES_IN = "7d";
 
-// -------------------------------------------------------------------
-// POST /api/auth/register
-// Create a new user account
-// -------------------------------------------------------------------
 router.post("/register", async (req, res) => {
     try {
         const { email, password, name } = req.body;
 
-        // Validate input
         if (!email || !password || !name) {
             return res.status(400).json({
                 error: "Email, password, and name are required.",
@@ -29,7 +23,6 @@ router.post("/register", async (req, res) => {
             });
         }
 
-        // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({
@@ -37,11 +30,9 @@ router.post("/register", async (req, res) => {
             });
         }
 
-        // Create user
         const user = new User({ email, password, name });
         await user.save();
 
-        // Generate token
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
             expiresIn: JWT_EXPIRES_IN,
         });
@@ -57,22 +48,16 @@ router.post("/register", async (req, res) => {
     }
 });
 
-// -------------------------------------------------------------------
-// POST /api/auth/login
-// Authenticate user and return JWT
-// -------------------------------------------------------------------
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Validate input
         if (!email || !password) {
             return res.status(400).json({
                 error: "Email and password are required.",
             });
         }
 
-        // Find user
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(401).json({
@@ -80,7 +65,6 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Check password
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
             return res.status(401).json({
@@ -88,7 +72,6 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Generate token
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
             expiresIn: JWT_EXPIRES_IN,
         });
@@ -104,10 +87,6 @@ router.post("/login", async (req, res) => {
     }
 });
 
-// -------------------------------------------------------------------
-// GET /api/auth/me
-// Get current user from token
-// -------------------------------------------------------------------
 router.get("/me", async (req, res) => {
     try {
         const authHeader = req.headers.authorization;

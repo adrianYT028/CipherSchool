@@ -1,14 +1,6 @@
 import "./ResultsPanel.scss";
 
-// -------------------------------------------------------------------
-// ResultsPanel
-// Displays query output as a formatted table or shows an error
-// message.  Has three visual states: empty (no query run yet),
-// loading (spinner), and populated (table or error).
-// -------------------------------------------------------------------
-
 function ResultsPanel({ columns, rows, error, isLoading }) {
-    // Nothing has been run yet.
     if (!isLoading && !error && !columns) {
         return (
             <div className="results-panel results-panel--empty">
@@ -23,7 +15,6 @@ function ResultsPanel({ columns, rows, error, isLoading }) {
         <div className="results-panel">
             <h3 className="results-panel__heading">Results</h3>
 
-            {/* Loading spinner */}
             {isLoading && (
                 <div className="results-panel__loader">
                     <div className="results-panel__spinner" />
@@ -31,7 +22,6 @@ function ResultsPanel({ columns, rows, error, isLoading }) {
                 </div>
             )}
 
-            {/* Error message */}
             {!isLoading && error && (
                 <div className="results-panel__error">
                     <span className="results-panel__error-label">Error</span>
@@ -39,7 +29,6 @@ function ResultsPanel({ columns, rows, error, isLoading }) {
                 </div>
             )}
 
-            {/* Results table */}
             {!isLoading && !error && columns && (
                 <div className="results-panel__table-wrapper">
                     <table className="results-panel__table">

@@ -1,24 +1,15 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// -------------------------------------------------------------------
-// AttemptPage
-// Two-column workspace layout. On small screens everything stacks
-// vertically; on larger screens the sidebar sits beside the editor
-// and results area.
-// -------------------------------------------------------------------
-
 .attempt-page {
     max-width: 1600px;
     margin: 0 auto;
     padding: $space-md;
-    min-height: calc(100vh - 60px); // account for sticky header
+    min-height: calc(100vh - 60px);
 
     @include respond-to(medium) {
         padding: $space-lg;
     }
-
-    // -- Loading / error states -------------------------------------------
 
     &--loading,
     &--error {
@@ -58,8 +49,6 @@
         }
     }
 
-    // -- Two-column layout ------------------------------------------------
-
     &__layout {
         display: flex;
         flex-direction: column;
@@ -79,9 +68,8 @@
         @include respond-to(large) {
             width: 380px;
             flex-shrink: 0;
-            // Keep the sidebar visible as the user scrolls through results.
             position: sticky;
-            top: 80px; // below the header
+            top: 80px;
             max-height: calc(100vh - 100px);
             overflow-y: auto;
             @include styled-scrollbar;
@@ -94,21 +82,18 @@
 
     &__workspace {
         flex: 1;
-        min-width: 0; // prevents flex children from overflowing
+        min-width: 0;
         display: flex;
         flex-direction: column;
         gap: $space-md;
     }
 
     &__editor {
-        // Give the editor a default height that feels comfortable.
         min-height: 280px;
         height: 40vh;
         max-height: 500px;
         display: flex;
         flex-direction: column;
-
-        // The panel inside fills the full space.
         >* {
             flex: 1;
         }
@@ -117,8 +102,6 @@
     &__results {
         min-height: 200px;
     }
-
-    // -- Attempt History --------------------------------------------------
 
     &__history {
         background: $color-bg-surface;

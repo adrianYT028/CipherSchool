@@ -1,10 +1,3 @@
-// -- Seed script --------------------------------------------------------
-// Run with:  npm run seed
-//
-// Populates MongoDB with a handful of sample assignments so the app
-// has something to display right away.  Safe to run multiple times --
-// it clears existing assignments first to avoid duplicates.
-
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env"), override: true });
 const mongoose = require("mongoose");
@@ -263,8 +256,6 @@ async function seed() {
         await mongoose.connect(process.env.MONGO_URI, { directConnection: true });
         console.log("[seed] Connected to MongoDB");
 
-        // Wipe existing assignments so re-running the script doesn't
-        // create duplicates.
         await Assignment.deleteMany({});
         console.log("[seed] Cleared old assignments");
 

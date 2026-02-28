@@ -1,13 +1,6 @@
 import { useState } from "react";
 import "./DataViewer.scss";
 
-// -------------------------------------------------------------------
-// DataViewer
-// Collapsible section that shows the sample tables the student can
-// query against.  Each table gets its own expandable block with a
-// header showing the table name and a body with column headers + rows.
-// -------------------------------------------------------------------
-
 function DataViewer({ sampleTables }) {
     if (!sampleTables || sampleTables.length === 0) {
         return null;
@@ -25,7 +18,6 @@ function DataViewer({ sampleTables }) {
     );
 }
 
-// Handles the expand/collapse toggle for a single table.
 function TableBlock({ table }) {
     const [expanded, setExpanded] = useState(true);
 

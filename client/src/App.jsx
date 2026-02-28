@@ -6,11 +6,6 @@ import AttemptPage from "./pages/AttemptPage/AttemptPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import "./styles/main.scss";
 
-// -------------------------------------------------------------------
-// App
-// Root component that sets up routing and the persistent header.
-// Includes authentication context for user management.
-// -------------------------------------------------------------------
 
 function App() {
     return (

@@ -4,10 +4,6 @@ const { authMiddleware } = require("../middleware/auth");
 
 const router = express.Router();
 
-// -------------------------------------------------------------------
-// POST /api/attempts
-// Save a query attempt (requires authentication)
-// -------------------------------------------------------------------
 router.post("/", authMiddleware, async (req, res) => {
     try {
         const { assignmentId, sql, success, error } = req.body;
@@ -38,10 +34,6 @@ router.post("/", authMiddleware, async (req, res) => {
     }
 });
 
-// -------------------------------------------------------------------
-// GET /api/attempts/:assignmentId
-// Get all attempts for an assignment by current user
-// -------------------------------------------------------------------
 router.get("/:assignmentId", authMiddleware, async (req, res) => {
     try {
         const { assignmentId } = req.params;
@@ -60,10 +52,6 @@ router.get("/:assignmentId", authMiddleware, async (req, res) => {
     }
 });
 
-// -------------------------------------------------------------------
-// GET /api/attempts
-// Get all attempts by current user (grouped by assignment)
-// -------------------------------------------------------------------
 router.get("/", authMiddleware, async (req, res) => {
     try {
         const attempts = await Attempt.find({ user: req.userId })

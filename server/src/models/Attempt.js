@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
 
-// -------------------------------------------------------------------
-// Attempt schema
-// Stores each SQL query attempt by a user for an assignment.
-// -------------------------------------------------------------------
-
 const attemptSchema = new mongoose.Schema(
     {
         user: {
@@ -33,7 +28,6 @@ const attemptSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-// Index for fast lookup of user's attempts per assignment
 attemptSchema.index({ user: 1, assignment: 1, createdAt: -1 });
 
 module.exports = mongoose.model("Attempt", attemptSchema);

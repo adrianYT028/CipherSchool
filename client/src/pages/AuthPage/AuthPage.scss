@@ -1,11 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// -------------------------------------------------------------------
-// AuthPage
-// Login and signup form styling with card layout.
-// -------------------------------------------------------------------
-
 .auth-page {
     min-height: calc(100vh - 60px);
     display: flex;

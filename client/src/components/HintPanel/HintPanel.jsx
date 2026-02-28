@@ -2,13 +2,6 @@ import { useState } from "react";
 import { getHint } from "../../api/apiClient";
 import "./HintPanel.scss";
 
-// -------------------------------------------------------------------
-// HintPanel
-// A button + expandable callout that fetches an LLM-generated hint
-// for the current assignment.  The hint never contains the full
-// solution -- that's enforced server-side via prompt engineering.
-// -------------------------------------------------------------------
-
 function HintPanel({ assignmentId, userQuery }) {
     const [hint, setHint] = useState(null);
     const [loading, setLoading] = useState(false);

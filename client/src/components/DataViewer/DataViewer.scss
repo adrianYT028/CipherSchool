@@ -1,11 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// -------------------------------------------------------------------
-// DataViewer
-// Collapsible tables showing the sample data for an assignment.
-// -------------------------------------------------------------------
-
 .data-viewer {
     @include glass-panel;
     padding: $space-lg;
@@ -26,8 +21,6 @@
         flex-direction: column;
         gap: $space-md;
     }
-
-    // -- Individual table block -------------------------------------------
 
     &__block {
         border: 1px solid $color-border;
@@ -58,8 +51,6 @@
         font-size: $font-size-xs;
         color: $color-text-muted;
     }
-
-    // -- Table itself -----------------------------------------------------
 
     &__table-wrapper {
         overflow-x: auto;

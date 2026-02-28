@@ -3,13 +3,6 @@ import AssignmentCard from "../../components/AssignmentCard/AssignmentCard";
 import { fetchAssignments } from "../../api/apiClient";
 import "./AssignmentListPage.scss";
 
-// -------------------------------------------------------------------
-// AssignmentListPage
-// Landing page showing all available SQL assignments in a responsive
-// grid.  Includes a difficulty filter so students can focus on the
-// level they're working on.
-// -------------------------------------------------------------------
-
 const DIFFICULTY_OPTIONS = ["All", "Easy", "Medium", "Hard"];
 
 function AssignmentListPage() {
@@ -34,7 +27,6 @@ function AssignmentListPage() {
         }
     };
 
-    // Apply the difficulty filter locally since the full list is small.
     const displayed =
         filter === "All"
             ? assignments
@@ -50,7 +42,6 @@ function AssignmentListPage() {
                 </p>
             </section>
 
-            {/* Difficulty filter tabs */}
             <div className="assignment-list__filters">
                 {DIFFICULTY_OPTIONS.map((opt) => (
                     <button
@@ -64,7 +55,6 @@ function AssignmentListPage() {
                 ))}
             </div>
 
-            {/* States: loading, error, empty, grid */}
             {loading && (
                 <div className="assignment-list__status">
                     <div className="assignment-list__spinner" />

@@ -1,14 +1,4 @@
-// -------------------------------------------------------------------
-// Reusable mixins
-// Keeps responsive logic and repeated patterns in one place so
-// components stay clean and consistent.
-// -------------------------------------------------------------------
-
 @use "variables" as *;
-
-// -- Responsive breakpoint mixin ----------------------------------------
-// Usage:  @include respond-to(medium) { ... }
-// Generates a min-width media query for the requested breakpoint.
 
 @mixin respond-to($breakpoint) {
     @if $breakpoint ==small {
@@ -36,8 +26,6 @@
     }
 }
 
-// -- Glass-morphism panel ------------------------------------------------
-// The frosted-glass look used on cards and elevated surfaces.
 
 @mixin glass-panel($blur: 12px) {
     background: rgba($color-bg-surface, 0.75);
@@ -47,8 +35,6 @@
     border-radius: $radius-lg;
 }
 
-// -- Truncate text -------------------------------------------------------
-// Cuts long text with an ellipsis after a given number of lines.
 
 @mixin truncate-lines($lines: 2) {
     display: -webkit-box;
@@ -58,8 +44,6 @@
     text-overflow: ellipsis;
 }
 
-// -- Custom scrollbar ----------------------------------------------------
-// Thin, dark scrollbar that fits the theme.
 
 @mixin styled-scrollbar($width: 6px) {
     &::-webkit-scrollbar {
@@ -81,7 +65,6 @@
     }
 }
 
-// -- Flex helpers --------------------------------------------------------
 
 @mixin flex-center {
     display: flex;

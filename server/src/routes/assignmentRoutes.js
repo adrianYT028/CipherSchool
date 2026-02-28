@@ -3,10 +3,6 @@ const Assignment = require("../models/Assignment");
 
 const router = express.Router();
 
-// -- GET /api/assignments -----------------------------------------------
-// Returns a trimmed list for the listing page (no sample data, no
-// expected output -- those are only needed on the attempt page).
-
 router.get("/", async (_req, res) => {
     try {
         const assignments = await Assignment.find(
@@ -21,9 +17,6 @@ router.get("/", async (_req, res) => {
     }
 });
 
-// -- GET /api/assignments/:id -------------------------------------------
-// Returns the full document including sample tables and expected output.
-
 router.get("/:id", async (req, res) => {
     try {
         const assignment = await Assignment.findById(req.params.id);
@@ -34,7 +27,6 @@ router.get("/:id", async (req, res) => {
 
         res.json(assignment);
     } catch (err) {
-        // Mongoose throws a CastError when the id format is invalid
         if (err.name === "CastError") {
             return res.status(400).json({ error: "Invalid assignment ID format." });
         }

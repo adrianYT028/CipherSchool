@@ -1,13 +1,5 @@
-// -------------------------------------------------------------------
-// Global base styles
-// Reset, typography defaults, and body-level layout.
-// Imported once via main.scss -- do not import directly in components.
-// -------------------------------------------------------------------
-
 @use "variables" as *;
 @use "mixins" as *;
-
-// -- Minimal reset -------------------------------------------------------
 
 *,
 *::before,
@@ -18,7 +10,7 @@
 }
 
 html {
-    font-size: 100%; // 1rem = 16px
+    font-size: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -29,15 +21,12 @@ body {
     font-weight: $font-weight-regular;
     color: $color-text-primary;
     background: $color-bg-primary;
-    // Subtle radial gradient adds depth to the background
     background-image:
         radial-gradient(ellipse at 20% 0%, rgba(108, 99, 255, 0.06) 0%, transparent 60%),
         radial-gradient(ellipse at 80% 100%, rgba(45, 212, 168, 0.04) 0%, transparent 60%);
     min-height: 100vh;
     line-height: 1.6;
 }
-
-// -- Links ---------------------------------------------------------------
 
 a {
     color: $color-accent;
@@ -49,7 +38,6 @@ a {
     }
 }
 
-// -- Headings -----------------------------------------------------------
 
 h1,
 h2,
@@ -62,16 +50,12 @@ h6 {
     color: $color-text-primary;
 }
 
-// -- Code ---------------------------------------------------------------
 
 code,
 pre {
     font-family: $font-mono;
 }
 
-// -- Buttons (base) -----------------------------------------------------
-// Component-specific button styles sit in their own SCSS files.
-// This just kills the browser defaults.
 
 button {
     cursor: pointer;
@@ -83,19 +67,16 @@ button {
     color: inherit;
 }
 
-// -- Custom scrollbar on the root ---------------------------------------
 
 body {
     @include styled-scrollbar(8px);
 }
 
-// -- Utility: smooth scrolling ------------------------------------------
 
 html {
     scroll-behavior: smooth;
 }
 
-// -- Selection colour ---------------------------------------------------
 
 ::selection {
     background: rgba($color-accent, 0.3);

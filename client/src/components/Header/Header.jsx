@@ -2,13 +2,6 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./Header.scss";
 
-// -------------------------------------------------------------------
-// Header
-// Sticky top bar with the app title and a small nav link back to the
-// assignment list.  Uses a frosted-glass effect to stay readable when
-// content scrolls underneath.  Shows login/logout based on auth state.
-// -------------------------------------------------------------------
-
 function Header() {
     const { user, isAuthenticated, logout } = useAuth();
 

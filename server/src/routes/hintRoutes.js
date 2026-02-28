@@ -4,10 +4,6 @@ const { generateHint } = require("../services/hintService");
 
 const router = express.Router();
 
-// -- POST /api/hint -----------------------------------------------------
-// Accepts { assignmentId, userQuery } and returns a single hint from
-// the LLM.  The prompt is engineered to never give away the full answer.
-
 router.post("/", async (req, res) => {
     try {
         const { assignmentId, userQuery } = req.body;

@@ -1,8 +1,3 @@
-// -- SQL sanitization middleware -----------------------------------------
-// Blocks queries that could modify schema or data.  We only allow SELECT
-// statements in the sandbox so students can't break the sample tables.
-
-// Keywords that signal destructive or schema-altering operations.
 const BLOCKED_KEYWORDS = [
     "DROP",
     "ALTER",
@@ -14,13 +9,9 @@ const BLOCKED_KEYWORDS = [
     "GRANT",
     "REVOKE",
     "COPY",
-    "\\\\",        // backslash commands in psql
+    "\\\\",
 ];
 
-/**
- * Checks whether a raw SQL string contains anything we don't want to run
- * inside the student sandbox.  Returns an object with { safe, reason }.
- */
 const validateSQL = (rawSQL) => {
     if (!rawSQL || typeof rawSQL !== "string") {
         return { safe: false, reason: "Query cannot be empty." };
@@ -31,13 +22,9 @@ const validateSQL = (rawSQL) => {
         return { safe: false, reason: "Query cannot be empty." };
     }
 
-    // Normalise to uppercase for keyword matching but keep the
-    // original string for execution.
     const upper = trimmed.toUpperCase();
 
     for (const keyword of BLOCKED_KEYWORDS) {
-        // Use word-boundary check so we don't accidentally block column
-        // names that happen to contain a keyword (e.g. "updated_at").
         const pattern = new RegExp(`\\b${keyword}\\b`);
         if (pattern.test(upper)) {
             return {
@@ -47,7 +34,6 @@ const validateSQL = (rawSQL) => {
         }
     }
 
-    // Make sure the statement actually starts with SELECT or WITH (for CTEs).
     if (!upper.startsWith("SELECT") && !upper.startsWith("WITH")) {
         return {
             safe: false,
@@ -58,10 +44,6 @@ const validateSQL = (rawSQL) => {
     return { safe: true, reason: null };
 };
 
-/**
- * Express middleware that validates the `sql` field on the request body.
- * Attaches the cleaned SQL to req.cleanSQL on success.
- */
 const sanitizeMiddleware = (req, res, next) => {
     const { sql } = req.body;
     const result = validateSQL(sql);
@@ -70,8 +52,6 @@ const sanitizeMiddleware = (req, res, next) => {
         return res.status(400).json({ error: result.reason });
     }
 
-    // Strip trailing semicolons -- pg will complain about multiple
-    // statements if we leave them in and the user accidentally typed two.
     req.cleanSQL = sql.trim().replace(/;+\s*$/, "");
     next();
 };

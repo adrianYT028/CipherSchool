@@ -1,24 +1,13 @@
 import Editor from "@monaco-editor/react";
 import "./SqlEditor.scss";
 
-// -------------------------------------------------------------------
-// SqlEditor
-// Wraps the Monaco editor configured for SQL.  We disable the minimap
-// and keep the interface minimal so the focus stays on the query.
-// The "Run Query" button lives here because it's directly tied to the
-// editor content.
-// -------------------------------------------------------------------
-
 function SqlEditor({ value, onChange, onRun, isRunning }) {
     const handleEditorChange = (newValue) => {
         onChange(newValue || "");
     };
 
-    // Allow Ctrl+Enter (or Cmd+Enter on Mac) to run the query.
     const handleEditorMount = (editor, monaco) => {
         editor.addCommand(
-            // Monaco keybinding for Ctrl+Enter
-            // eslint-disable-next-line no-bitwise
             monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
             () => {
                 if (onRun) onRun();

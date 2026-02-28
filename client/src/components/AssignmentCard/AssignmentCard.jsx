@@ -1,14 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./AssignmentCard.scss";
 
-// -------------------------------------------------------------------
-// AssignmentCard
-// Renders a single assignment on the listing page.  Clicking the
-// card navigates to the attempt interface for that assignment.
-// -------------------------------------------------------------------
-
-// Map difficulty labels to a CSS modifier class so we can colour-code
-// the badge without any runtime style objects.
 const DIFFICULTY_CLASS = {
     Easy: "assignment-card__badge--easy",
     Medium: "assignment-card__badge--medium",

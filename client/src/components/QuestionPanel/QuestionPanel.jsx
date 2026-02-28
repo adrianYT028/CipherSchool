@@ -1,13 +1,5 @@
 import "./QuestionPanel.scss";
 
-// -------------------------------------------------------------------
-// QuestionPanel
-// Shows the assignment question text and difficulty on the left side
-// of the attempt interface.  Nothing interactive here -- it's just a
-// read-only reference panel that stays visible while the student
-// writes their query.
-// -------------------------------------------------------------------
-
 const DIFFICULTY_CLASS = {
     Easy: "question-panel__difficulty--easy",
     Medium: "question-panel__difficulty--medium",

@@ -1,11 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// -------------------------------------------------------------------
-// QuestionPanel
-// Left-side panel on the attempt page.
-// -------------------------------------------------------------------
-
 .question-panel {
     @include glass-panel;
     padding: $space-lg;

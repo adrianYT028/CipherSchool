@@ -1,11 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// -------------------------------------------------------------------
-// HintPanel
-// Floating hint trigger and dismissible callout.
-// -------------------------------------------------------------------
-
 .hint-panel {
     position: relative;
 

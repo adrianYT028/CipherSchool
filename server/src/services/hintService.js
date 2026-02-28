@@ -1,15 +1,7 @@
 const Groq = require("groq-sdk");
 
-// -- Hint service -------------------------------------------------------
-// Wraps the Groq API call with strict prompt engineering so the model
-// gives useful guidance without handing out the full answer.
-
 let groqClient = null;
 
-/**
- * Lazily initialise the SDK so the server still starts even if the key
- * is missing (the hint endpoint will just return an error).
- */
 function _getClient() {
     if (!groqClient) {
         const key = process.env.GROQ_API_KEY;
@@ -21,18 +13,9 @@ function _getClient() {
     return groqClient;
 }
 
-/**
- * Generates a hint for the given assignment question and the student's
- * current (possibly empty) query attempt.
- *
- * The system prompt is carefully worded to prevent the model from
- * leaking the complete solution.
- */
 const generateHint = async (question, userQuery, sampleTables) => {
     const client = _getClient();
 
-    // Build a concise description of the tables so the model
-    // understands the schema without us sending all the row data.
     const tableDescriptions = (sampleTables || [])
         .map((t) => `Table "${t.tableName}" with columns: ${t.columns.join(", ")}`)
         .join("\n");

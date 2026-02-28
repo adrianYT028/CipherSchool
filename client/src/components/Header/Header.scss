@@ -1,11 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// -------------------------------------------------------------------
-// Header
-// Full-width sticky bar with frosted-glass backdrop.
-// -------------------------------------------------------------------
-
 .header {
     position: sticky;
     top: 0;

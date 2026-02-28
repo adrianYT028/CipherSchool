@@ -1,11 +1,6 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// -------------------------------------------------------------------
-// AssignmentListPage
-// Hero section, filter bar, and responsive card grid.
-// -------------------------------------------------------------------
-
 .assignment-list {
     max-width: 1400px;
     margin: 0 auto;
@@ -14,8 +9,6 @@
     @include respond-to(medium) {
         padding: $space-xl $space-lg;
     }
-
-    // -- Hero section -----------------------------------------------------
 
     &__hero {
         text-align: center;
@@ -44,8 +37,6 @@
         margin: 0 auto;
         line-height: 1.6;
     }
-
-    // -- Filter bar -------------------------------------------------------
 
     &__filters {
         display: flex;
@@ -77,8 +68,6 @@
         }
     }
 
-    // -- Card grid --------------------------------------------------------
-
     &__grid {
         display: grid;
         grid-template-columns: 1fr;
@@ -92,8 +81,6 @@
             grid-template-columns: repeat(3, 1fr);
         }
     }
-
-    // -- Status messages --------------------------------------------------
 
     &__status {
         @include flex-center;

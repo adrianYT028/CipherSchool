@@ -9,18 +9,6 @@ import { fetchAssignment, executeQuery, saveAttempt, getAttempts } from "../../a
 import { useAuth } from "../../context/AuthContext";
 import "./AttemptPage.scss";
 
-// -------------------------------------------------------------------
-// AttemptPage
-// The main workspace for a single assignment.  Split into:
-//   - Left column:  question + sample data
-//   - Right column: editor (top) + results (bottom)
-// A "Get Hint" button floats in the editor toolbar area.
-//
-// Session IDs are persisted in localStorage so the same sandbox
-// schema is reused across page reloads.
-// -------------------------------------------------------------------
-
-// Grab or create a sessionId that the backend uses for schema isolation.
 function getSessionId() {
     let id = localStorage.getItem("ciphersql_session");
     if (!id) {
@@ -38,7 +26,6 @@ function AttemptPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Editor and results state
     const [sql, setSql] = useState("SELECT ");
     const [queryResult, setQueryResult] = useState({
         columns: null,
@@ -47,7 +34,6 @@ function AttemptPage() {
     });
     const [running, setRunning] = useState(false);
 
-    // Attempt history (for logged-in users)
     const [attempts, setAttempts] = useState([]);
     const [showHistory, setShowHistory] = useState(false);
 
@@ -55,12 +41,10 @@ function AttemptPage() {
         loadAssignment();
     }, [id]);
 
-    // Load attempts when auth is ready and user is logged in
     useEffect(() => {
         if (!authLoading && isAuthenticated) {
             loadAttempts();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, authLoading, isAuthenticated]);
 
     const loadAssignment = async () => {
@@ -113,7 +97,6 @@ function AttemptPage() {
             setRunning(false);
         }
 
-        // Save attempt if logged in
         if (isAuthenticated) {
             try {
                 await saveAttempt({
@@ -128,8 +111,6 @@ function AttemptPage() {
             }
         }
     }, [sql, running, id, isAuthenticated]);
-
-    // -- Render -----------------------------------------------------------
 
     if (loading) {
         return (

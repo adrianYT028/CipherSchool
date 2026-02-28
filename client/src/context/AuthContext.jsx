@@ -1,19 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { getCurrentUser, login as apiLogin, register as apiRegister } from "../api/apiClient";
 
-// -------------------------------------------------------------------
-// AuthContext
-// Manages user authentication state across the app.
-// Provides login, register, logout methods and current user.
-// -------------------------------------------------------------------
-
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Check for existing token on mount
     useEffect(() => {
         checkAuth();
     }, []);
@@ -29,7 +22,6 @@ export function AuthProvider({ children }) {
             const data = await getCurrentUser();
             setUser(data.user);
         } catch (err) {
-            // Token invalid, clear it
             localStorage.removeItem("ciphersql_token");
         } finally {
             setLoading(false);
