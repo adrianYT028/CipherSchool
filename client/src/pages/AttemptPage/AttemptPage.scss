@@ -1,0 +1,191 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// -------------------------------------------------------------------
+// AttemptPage
+// Two-column workspace layout. On small screens everything stacks
+// vertically; on larger screens the sidebar sits beside the editor
+// and results area.
+// -------------------------------------------------------------------
+
+.attempt-page {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: $space-md;
+    min-height: calc(100vh - 60px); // account for sticky header
+
+    @include respond-to(medium) {
+        padding: $space-lg;
+    }
+
+    // -- Loading / error states -------------------------------------------
+
+    &--loading,
+    &--error {
+        @include flex-center;
+        flex-direction: column;
+        gap: $space-md;
+        min-height: 60vh;
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+    }
+
+    &--error {
+        color: $color-error;
+    }
+
+    &__spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid $color-border-light;
+        border-top-color: $color-accent;
+        border-radius: 50%;
+        animation: attemptSpin 0.8s linear infinite;
+    }
+
+    @keyframes attemptSpin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    &__back-link {
+        font-size: $font-size-sm;
+        color: $color-accent;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    // -- Two-column layout ------------------------------------------------
+
+    &__layout {
+        display: flex;
+        flex-direction: column;
+        gap: $space-lg;
+
+        @include respond-to(large) {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+    }
+
+    &__sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: $space-md;
+
+        @include respond-to(large) {
+            width: 380px;
+            flex-shrink: 0;
+            // Keep the sidebar visible as the user scrolls through results.
+            position: sticky;
+            top: 80px; // below the header
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            @include styled-scrollbar;
+        }
+
+        @include respond-to(xlarge) {
+            width: 420px;
+        }
+    }
+
+    &__workspace {
+        flex: 1;
+        min-width: 0; // prevents flex children from overflowing
+        display: flex;
+        flex-direction: column;
+        gap: $space-md;
+    }
+
+    &__editor {
+        // Give the editor a default height that feels comfortable.
+        min-height: 280px;
+        height: 40vh;
+        max-height: 500px;
+        display: flex;
+        flex-direction: column;
+
+        // The panel inside fills the full space.
+        >* {
+            flex: 1;
+        }
+    }
+
+    &__results {
+        min-height: 200px;
+    }
+
+    // -- Attempt History --------------------------------------------------
+
+    &__history {
+        background: $color-bg-surface;
+        border: 1px solid $color-border;
+        border-radius: $radius-md;
+        padding: $space-sm;
+    }
+
+    &__history-toggle {
+        width: 100%;
+        padding: $space-xs $space-sm;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        font-family: $font-sans;
+        color: $color-text-secondary;
+        background: $color-bg-secondary;
+        border: 1px solid $color-border;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover {
+            color: $color-text-primary;
+            border-color: $color-accent;
+        }
+    }
+
+    &__history-list {
+        margin-top: $space-sm;
+        max-height: 200px;
+        overflow-y: auto;
+        @include styled-scrollbar;
+        display: flex;
+        flex-direction: column;
+        gap: $space-xxs;
+    }
+
+    &__history-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $space-xs $space-sm;
+        font-size: $font-size-sm;
+        background: $color-bg-secondary;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: background $transition-fast;
+
+        &:hover {
+            background: $color-bg-elevated;
+        }
+
+        &--success {
+            border-left: 3px solid $color-success;
+        }
+
+        &--error {
+            border-left: 3px solid $color-error;
+        }
+    }
+
+    &__history-time {
+        color: $color-text-muted;
+        font-size: $font-size-xs;
+    }
+
+    &__history-status {
+        font-weight: $font-weight-bold;
+    }
+}

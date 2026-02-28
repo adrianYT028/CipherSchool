@@ -1,0 +1,161 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// -------------------------------------------------------------------
+// AuthPage
+// Login and signup form styling with card layout.
+// -------------------------------------------------------------------
+
+.auth-page {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-md;
+
+    &__card {
+        width: 100%;
+        max-width: 420px;
+        background: $color-bg-surface;
+        border: 1px solid $color-border;
+        border-radius: $radius-lg;
+        padding: $space-lg;
+
+        @include respond-to(medium) {
+            padding: $space-xl;
+        }
+    }
+
+    &__title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $color-text-primary;
+        text-align: center;
+        margin-bottom: $space-xs;
+    }
+
+    &__subtitle {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        text-align: center;
+        margin-bottom: $space-lg;
+    }
+
+    &__tabs {
+        display: flex;
+        gap: $space-xs;
+        margin-bottom: $space-lg;
+        background: $color-bg-secondary;
+        border-radius: $radius-md;
+        padding: $space-xxs;
+    }
+
+    &__tab {
+        flex: 1;
+        padding: $space-xs $space-md;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+        background: transparent;
+        border: none;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover {
+            color: $color-text-primary;
+        }
+
+        &--active {
+            background: $color-bg-surface;
+            color: $color-text-primary;
+            box-shadow: $shadow-sm;
+        }
+    }
+
+    &__error {
+        background: rgba($color-error, 0.1);
+        border: 1px solid rgba($color-error, 0.3);
+        color: $color-error;
+        padding: $space-sm $space-md;
+        border-radius: $radius-sm;
+        font-size: $font-size-sm;
+        margin-bottom: $space-md;
+        text-align: center;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: $space-md;
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: $space-xxs;
+    }
+
+    &__label {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+    }
+
+    &__input {
+        padding: $space-sm $space-md;
+        font-size: $font-size-base;
+        font-family: $font-sans;
+        color: $color-text-primary;
+        background: $color-bg-secondary;
+        border: 1px solid $color-border;
+        border-radius: $radius-sm;
+        transition: border-color $transition-fast;
+
+        &::placeholder {
+            color: $color-text-muted;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $color-accent;
+        }
+    }
+
+    &__submit {
+        margin-top: $space-sm;
+        padding: $space-sm $space-md;
+        font-size: $font-size-base;
+        font-weight: $font-weight-medium;
+        color: white;
+        background: $color-accent;
+        border: none;
+        border-radius: $radius-sm;
+        cursor: pointer;
+        transition: background $transition-fast;
+
+        &:hover:not(:disabled) {
+            background: $color-accent-hover;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+
+    &__footer {
+        margin-top: $space-lg;
+        text-align: center;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+    }
+
+    &__link {
+        color: $color-accent;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

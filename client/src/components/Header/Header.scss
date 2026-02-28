@@ -1,0 +1,98 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// -------------------------------------------------------------------
+// Header
+// Full-width sticky bar with frosted-glass backdrop.
+// -------------------------------------------------------------------
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    @include glass-panel(16px);
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid $color-border;
+
+    &__inner {
+        @include flex-between;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: $space-sm $space-md;
+
+        @include respond-to(medium) {
+            padding: $space-md $space-lg;
+        }
+    }
+
+    &__logo {
+        font-size: $font-size-md;
+        font-weight: $font-weight-bold;
+        color: $color-text-primary;
+        letter-spacing: -0.02em;
+        transition: color $transition-fast;
+
+        @include respond-to(medium) {
+            font-size: $font-size-lg;
+        }
+
+        &:hover {
+            color: $color-accent;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: $space-sm;
+
+        @include respond-to(medium) {
+            gap: $space-md;
+        }
+    }
+
+    &__nav-link {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+        padding: $space-xxs $space-xs;
+        border-radius: $radius-sm;
+        transition: color $transition-fast, background $transition-fast;
+
+        &:hover {
+            color: $color-text-primary;
+            background: $color-accent-muted;
+        }
+    }
+
+    &__user {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        padding: $space-xxs $space-xs;
+        
+        @media (max-width: $bp-medium) {
+            display: none;
+        }
+    }
+
+    &__login {
+        background: $color-accent;
+        color: white !important;
+        padding: $space-xxs $space-sm;
+
+        &:hover {
+            background: $color-accent-hover;
+        }
+    }
+
+    &__logout {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: $font-sans;
+    }
+}

@@ -1,0 +1,144 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// -------------------------------------------------------------------
+// ResultsPanel
+// Query output or error display at the bottom of the attempt page.
+// -------------------------------------------------------------------
+
+.results-panel {
+    @include glass-panel;
+    padding: $space-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+    overflow: hidden;
+
+    &--empty {
+        @include flex-center;
+        min-height: 120px;
+    }
+
+    &__heading {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $color-text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+
+    &__placeholder {
+        color: $color-text-muted;
+        font-size: $font-size-sm;
+        font-style: italic;
+    }
+
+    // -- Loader -----------------------------------------------------------
+
+    &__loader {
+        @include flex-center;
+        flex-direction: column;
+        gap: $space-sm;
+        padding: $space-xl 0;
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+    }
+
+    &__spinner {
+        width: 28px;
+        height: 28px;
+        border: 3px solid $color-border-light;
+        border-top-color: $color-accent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    // -- Error display ----------------------------------------------------
+
+    &__error {
+        background: rgba($color-error, 0.08);
+        border: 1px solid rgba($color-error, 0.25);
+        border-radius: $radius-md;
+        padding: $space-md;
+    }
+
+    &__error-label {
+        display: inline-block;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        color: $color-error;
+        margin-bottom: $space-xs;
+    }
+
+    &__error-text {
+        font-family: $font-mono;
+        font-size: $font-size-sm;
+        color: $color-text-primary;
+        white-space: pre-wrap;
+        word-break: break-word;
+        line-height: 1.5;
+    }
+
+    // -- Results table ----------------------------------------------------
+
+    &__table-wrapper {
+        overflow-x: auto;
+        @include styled-scrollbar(4px);
+    }
+
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: $font-size-sm;
+    }
+
+    &__th {
+        text-align: left;
+        padding: $space-xs $space-sm;
+        background: $color-bg-elevated;
+        color: $color-accent;
+        font-family: $font-mono;
+        font-weight: $font-weight-medium;
+        font-size: $font-size-xs;
+        border-bottom: 1px solid $color-border;
+        white-space: nowrap;
+    }
+
+    &__tr {
+        transition: background $transition-fast;
+
+        &:hover {
+            background: rgba($color-accent, 0.04);
+        }
+    }
+
+    &__td {
+        padding: $space-xs $space-sm;
+        color: $color-text-primary;
+        border-bottom: 1px solid $color-border;
+        font-family: $font-mono;
+        font-size: $font-size-xs;
+        white-space: nowrap;
+
+        &--empty {
+            text-align: center;
+            color: $color-text-muted;
+            font-style: italic;
+            font-family: $font-sans;
+        }
+    }
+
+    &__row-count {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        text-align: right;
+        padding-top: $space-xs;
+    }
+}

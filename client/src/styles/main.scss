@@ -1,0 +1,9 @@
+// -------------------------------------------------------------------
+// main.scss
+// Single entry point that pulls in all partials.
+// Components import their own .scss files separately.
+// -------------------------------------------------------------------
+
+@use "variables";
+@use "mixins";
+@use "base";

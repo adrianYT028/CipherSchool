@@ -1,0 +1,89 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// -------------------------------------------------------------------
+// HintPanel
+// Floating hint trigger and dismissible callout.
+// -------------------------------------------------------------------
+
+.hint-panel {
+    position: relative;
+
+    &__trigger {
+        padding: $space-xs $space-lg;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: $color-warning;
+        background: rgba($color-warning, 0.1);
+        border: 1px solid rgba($color-warning, 0.25);
+        border-radius: $radius-md;
+        transition: background $transition-fast, transform $transition-fast;
+
+        &:hover:not(:disabled) {
+            background: rgba($color-warning, 0.18);
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    &__callout {
+        margin-top: $space-sm;
+        @include glass-panel;
+        padding: $space-md;
+        border-color: rgba($color-warning, 0.2);
+        animation: fadeSlideIn 0.25s ease forwards;
+    }
+
+    &__callout-header {
+        @include flex-between;
+        margin-bottom: $space-sm;
+    }
+
+    &__callout-label {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: $color-warning;
+    }
+
+    &__close {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        padding: $space-xxs $space-xs;
+        border-radius: $radius-sm;
+        transition: color $transition-fast, background $transition-fast;
+
+        &:hover {
+            color: $color-text-primary;
+            background: $color-bg-elevated;
+        }
+    }
+
+    &__text {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        line-height: 1.7;
+    }
+
+    &__error {
+        font-size: $font-size-sm;
+        color: $color-error;
+    }
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,60 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// -------------------------------------------------------------------
+// QuestionPanel
+// Left-side panel on the attempt page.
+// -------------------------------------------------------------------
+
+.question-panel {
+    @include glass-panel;
+    padding: $space-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+
+    &__header {
+        @include flex-between;
+        flex-wrap: wrap;
+        gap: $space-xs;
+    }
+
+    &__title {
+        font-size: $font-size-md;
+        font-weight: $font-weight-bold;
+
+        @include respond-to(medium) {
+            font-size: $font-size-lg;
+        }
+    }
+
+    &__difficulty {
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: $space-xxs $space-xs;
+        border-radius: $radius-sm;
+
+        &--easy {
+            color: $color-easy;
+            background: rgba($color-easy, 0.12);
+        }
+
+        &--medium {
+            color: $color-medium;
+            background: rgba($color-medium, 0.12);
+        }
+
+        &--hard {
+            color: $color-hard;
+            background: rgba($color-hard, 0.12);
+        }
+    }
+
+    &__question {
+        font-size: $font-size-base;
+        color: $color-text-secondary;
+        line-height: 1.7;
+    }
+}

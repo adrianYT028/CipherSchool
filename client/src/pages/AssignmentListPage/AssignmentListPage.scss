@@ -1,0 +1,125 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// -------------------------------------------------------------------
+// AssignmentListPage
+// Hero section, filter bar, and responsive card grid.
+// -------------------------------------------------------------------
+
+.assignment-list {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: $space-lg $space-md;
+
+    @include respond-to(medium) {
+        padding: $space-xl $space-lg;
+    }
+
+    // -- Hero section -----------------------------------------------------
+
+    &__hero {
+        text-align: center;
+        margin-bottom: $space-xl;
+        padding: $space-xl 0;
+    }
+
+    &__title {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        margin-bottom: $space-sm;
+        background: linear-gradient(135deg, $color-text-primary, $color-accent);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        @include respond-to(medium) {
+            font-size: 2.5rem;
+        }
+    }
+
+    &__subtitle {
+        font-size: $font-size-base;
+        color: $color-text-secondary;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    // -- Filter bar -------------------------------------------------------
+
+    &__filters {
+        display: flex;
+        gap: $space-xs;
+        margin-bottom: $space-xl;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    &__filter-btn {
+        padding: $space-xs $space-md;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+        border: 1px solid $color-border;
+        border-radius: $radius-md;
+        transition: all $transition-fast;
+
+        &:hover {
+            color: $color-text-primary;
+            border-color: $color-accent;
+            background: $color-accent-muted;
+        }
+
+        &--active {
+            color: #fff;
+            background: $color-accent;
+            border-color: $color-accent;
+        }
+    }
+
+    // -- Card grid --------------------------------------------------------
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: $space-lg;
+
+        @include respond-to(medium) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include respond-to(large) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    // -- Status messages --------------------------------------------------
+
+    &__status {
+        @include flex-center;
+        flex-direction: column;
+        gap: $space-sm;
+        padding: $space-xxl 0;
+        color: $color-text-secondary;
+        font-size: $font-size-sm;
+
+        &--error {
+            color: $color-error;
+        }
+    }
+
+    &__spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid $color-border-light;
+        border-top-color: $color-accent;
+        border-radius: 50%;
+        animation: listSpin 0.8s linear infinite;
+    }
+
+    @keyframes listSpin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}

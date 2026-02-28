@@ -1,0 +1,64 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+// -------------------------------------------------------------------
+// SqlEditor
+// Toolbar + Monaco editor container.
+// -------------------------------------------------------------------
+
+.sql-editor {
+    @include glass-panel;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &__toolbar {
+        @include flex-between;
+        padding: $space-sm $space-md;
+        border-bottom: 1px solid $color-border;
+    }
+
+    &__label {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+
+    &__run-btn {
+        padding: $space-xs $space-lg;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        color: #fff;
+        background: $color-accent;
+        border-radius: $radius-md;
+        transition: background $transition-fast, transform $transition-fast;
+
+        &:hover:not(:disabled) {
+            background: $color-accent-hover;
+            transform: translateY(-1px);
+        }
+
+        &:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    // The editor itself fills all remaining vertical space.
+    &__editor-wrapper {
+        flex: 1;
+        min-height: 200px;
+
+        // Override some Monaco container styles so it blends with our theme
+        .monaco-editor,
+        .monaco-editor .overflow-guard {
+            border-radius: 0 0 $radius-lg $radius-lg;
+        }
+    }
+}
